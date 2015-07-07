@@ -176,7 +176,7 @@ func (r *Router) Handle(path string, handler http.Handler) *Route {
 	return r.NewRoute().Path(path).Handler(handler)
 }
 
-func (r *Router) ListAllNamedRoutes() map[string]string {
+func (r *Router) ListNamedRoutes() map[string]string {
 	if r.parent == nil {
 		// During tests router is not always set.
 		r.parent = NewRouter()

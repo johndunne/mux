@@ -548,19 +548,6 @@ func (r *Route) getNamedRoutes() map[string]*Route {
 	return r.parent.getNamedRoutes()
 }
 
-func (r *Route) ListAllNamedRoutes() map[string]string {
-	if r.parent == nil {
-		// During tests router is not always set.
-		r.parent = NewRouter()
-	}
-	routes := r.parent.getNamedRoutes()
-	route_names := make(map[string]string, 0)
-	for name, route := range routes {
-		route_names[name] = route.GetName()
-	}
-	return route_names
-}
-
 // getRegexpGroup returns regexp definitions from this route.
 func (r *Route) getRegexpGroup() *routeRegexpGroup {
 	if r.regexp == nil {

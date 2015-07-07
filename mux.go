@@ -176,6 +176,19 @@ func (r *Router) Handle(path string, handler http.Handler) *Route {
 	return r.NewRoute().Path(path).Handler(handler)
 }
 
+func (r *Router) ListAllNamedRoutes() map[string]string {
+	if r.parent == nil {
+		// During tests router is not always set.
+		r.parent = NewRouter()
+	}
+	routes := r.parent.getNamedRoutes()
+	route_names := make(map[string]string, 0)
+	for name, route := range routes {
+		route_names[name] = route.GetName()
+	}
+	return route_names
+}
+
 // HandleFunc registers a new route with a matcher for the URL path.
 // See Route.Path() and Route.HandlerFunc().
 func (r *Router) HandleFunc(path string, f func(http.ResponseWriter,

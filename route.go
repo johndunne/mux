@@ -558,6 +558,7 @@ func (r *Route) ListAllNamedRoutes() map[string]string {
 	for name, route := range routes {
 		route_names[name] = route.GetName()
 	}
+	return route_names
 }
 
 // getRegexpGroup returns regexp definitions from this route.
